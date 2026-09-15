@@ -1,6 +1,4 @@
-README.md
-
-
+ 
 BlazorClientes
 Aplicação web para gerenciamento de clientes desenvolvida com Blazor, ASP.NET Core, API REST e Entity Framework Core. O projeto demonstra uma arquitetura organizada, responsiva e preparada para utilizar PostgreSQL.
 
