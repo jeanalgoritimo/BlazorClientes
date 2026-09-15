@@ -1,0 +1,65 @@
+﻿<div class="nav-menu">
+    <div class="brand">
+        <div class="brand-icon">
+            SG
+        </div>
+
+        <div class="brand-text">
+            <strong>Sistema de Gestão</strong>
+            <small>Gestão de clientes</small>
+        </div>
+    </div>
+
+    <nav class="navigation">
+        <div class="navigation-title">
+            Menu principal
+        </div>
+
+        <NavLink class="navigation-link"
+                 href=""
+                 Match="NavLinkMatch.All"
+                 @onclick="Navegar">
+
+            <span class="navigation-icon">
+                🏠
+            </span>
+
+            <span>Início</span>
+        </NavLink>
+
+        <NavLink class="navigation-link"
+                 href="clientes"
+                 @onclick="Navegar">
+
+            <span class="navigation-icon">
+                👥
+            </span>
+
+            <span>Clientes</span>
+        </NavLink>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="technology">
+            <span class="technology-status"></span>
+
+            <div>
+                <strong>Blazor .NET 8</strong>
+                <small>Aplicação online</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback OnNavigate { get; set; }
+
+    private async Task Navegar()
+    {
+        if (OnNavigate.HasDelegate)
+        {
+            await OnNavigate.InvokeAsync();
+        }
+    }
+}

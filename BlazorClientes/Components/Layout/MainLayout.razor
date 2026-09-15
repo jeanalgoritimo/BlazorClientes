@@ -1,0 +1,70 @@
+﻿@inherits LayoutComponentBase
+
+<div class="app-layout">
+    <aside class="sidebar @(menuAberto ? "sidebar-open" : string.Empty)">
+        <NavMenu OnNavigate="FecharMenu" />
+    </aside>
+
+    @if (menuAberto)
+    {
+        <button type="button"
+                class="sidebar-overlay"
+                aria-label="Fechar menu"
+                @onclick="FecharMenu">
+        </button>
+    }
+
+    <main class="main-content">
+        <header class="top-bar">
+            <button type="button"
+                    class="menu-toggle"
+                    aria-label="Abrir menu"
+                    @onclick="AlternarMenu">
+
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="top-bar-title">
+                Sistema de Gestão
+            </div>
+
+            <a href="/about"
+               class="top-bar-link">
+                Sobre
+            </a>
+        </header>
+
+        <article class="content">
+            @Body
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    Ocorreu um erro inesperado.
+
+    <a href=""
+       class="reload">
+        Recarregar
+    </a>
+
+    <a class="dismiss">
+        🗙
+    </a>
+</div>
+
+@code {
+    private bool menuAberto;
+
+    private void AlternarMenu()
+    {
+        menuAberto = !menuAberto;
+    }
+
+    private void FecharMenu()
+    {
+        menuAberto = false;
+    }
+}

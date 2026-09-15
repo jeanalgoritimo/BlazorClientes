@@ -1,0 +1,680 @@
+﻿@page "/clientes"
+@implements IDisposable
+
+@using BlazorClientes.Clients
+@using BlazorClientes.DTOs
+ 
+@inject IClienteApiClient ClienteApiClient
+
+<PageTitle>Clientes</PageTitle>
+
+<div class="container mt-4">
+    <div class="d-flex flex-wrap justify-content-between
+                align-items-center gap-3 mb-4">
+
+        <div>
+            <h1>Clientes</h1>
+
+            <p class="text-muted mb-0">
+                Cadastro e gerenciamento de clientes
+            </p>
+        </div>
+
+        <button type="button"
+                class="btn btn-primary"
+                disabled="@processando"
+                @onclick="NovoCliente">
+            Novo cliente
+        </button>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(mensagem))
+    {
+        <div class="alert @classeMensagem alert-dismissible"
+             role="alert">
+
+            @mensagem
+
+            <button type="button"
+                    class="btn-close"
+                    aria-label="Fechar"
+                    @onclick="LimparMensagem">
+            </button>
+        </div>
+    }
+
+    <!-- Pesquisa automática -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="position-relative">
+                <input type="search"
+                       class="form-control pe-5"
+                       value="@pesquisa"
+                       placeholder="Pesquisar por nome, e-mail ou telefone"
+                       autocomplete="off"
+                       aria-label="Pesquisar clientes"
+                       @oninput="AoDigitarPesquisaAsync" />
+
+                @if (pesquisando)
+                {
+                    <span class="spinner-border spinner-border-sm
+                                     text-primary position-absolute
+                                     top-50 end-0 translate-middle-y me-3"
+                          role="status">
+
+                        <span class="visually-hidden">
+                            Pesquisando...
+                        </span>
+                    </span>
+                }
+            </div>
+
+            <small class="text-muted">
+                A pesquisa é realizada automaticamente durante a digitação.
+            </small>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between
+                    align-items-center">
+
+            <span>
+                Clientes encontrados: @clientes.Count
+            </span>
+
+            @if (carregando && !pesquisando)
+            {
+                <span class="spinner-border spinner-border-sm"
+                      role="status">
+
+                    <span class="visually-hidden">
+                        Carregando...
+                    </span>
+                </span>
+            }
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Situação</th>
+                        <th>Cadastro</th>
+                        <th class="text-end">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (carregando && clientes.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6"
+                                class="text-center text-muted py-4">
+
+                                <div class="spinner-border text-primary"
+                                     role="status">
+                                    <span class="visually-hidden">
+                                        Carregando...
+                                    </span>
+                                </div>
+
+                                <div class="mt-2">
+                                    Carregando clientes...
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else if (!carregando && clientes.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6"
+                                class="text-center text-muted py-4">
+                                Nenhum cliente encontrado.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in clientes)
+                        {
+                            <tr @key="item.Id">
+                                <td>@item.Nome</td>
+                                <td>@item.Email</td>
+                                <td>@item.Telefone</td>
+
+                                <td>
+                                    @if (item.Ativo)
+                                    {
+                                        <span class="badge bg-success">
+                                            Ativo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            Inativo
+                                        </span>
+                                    }
+                            </td>
+
+                            <td>
+                                @(item.DataCadastro .ToLocalTime().ToString("dd/MM/yyyy HH:mm"))
+                        </td>
+
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2"
+                                         role="group">
+
+                                        <button type="button"
+                                                class="btn btn-sm
+                                                               btn-outline-primary"
+                                                disabled="@processando"
+                                                @onclick="() => EditarClienteAsync(item.Id)">
+                                            Editar
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-sm
+                                                               btn-outline-danger"
+                                                disabled="@processando"
+                                                @onclick="() => ConfirmarExclusao(item)">
+                                            Excluir
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de cadastro e edição -->
+@if (exibirModalCadastro)
+{
+    <div class="modal-backdrop fade show"></div>
+
+    <div class="modal fade show d-block"
+         tabindex="-1"
+         role="dialog"
+         aria-modal="true">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        @(clienteId.HasValue
+                                            ? "Editar cliente"
+                                            : "Novo cliente")
+                </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            aria-label="Fechar"
+                            disabled="@processando"
+                            @onclick="FecharModalCadastro">
+                    </button>
+                </div>
+
+                <EditForm Model="@cliente"
+                          FormName="formCliente"
+                          OnValidSubmit="SalvarClienteAsync">
+
+                    <DataAnnotationsValidator />
+
+                    <div class="modal-body">
+                        <ValidationSummary class="alert alert-danger" />
+
+                    @if (!string.IsNullOrWhiteSpace(erroModal))
+                        {
+                            <div class="alert alert-danger"
+                                 role="alert">
+                                @erroModal
+                            </div>
+                        }
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nome"
+                                       class="form-label">
+                                    Nome
+                                </label>
+
+                                <InputText id="nome"
+                                           class="form-control"
+                                           placeholder="Informe o nome"
+                                           @bind-Value="cliente.Nome" />
+
+                                <ValidationMessage For="@(() => cliente.Nome)" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="email"
+                                       class="form-label">
+                                    E-mail
+                                </label>
+
+                                <InputText id="email"
+                                           class="form-control"
+                                           placeholder="nome@email.com"
+                                           @bind-Value="cliente.Email" />
+
+                                <ValidationMessage For="@(() => cliente.Email)" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="telefone"
+                                       class="form-label">
+                                    Telefone
+                                </label>
+
+                                <InputText id="telefone"
+                                           class="form-control"
+                                           placeholder="(27) 99999-9999"
+                                           @bind-Value="cliente.Telefone" />
+
+                                <ValidationMessage For="@(() => cliente.Telefone)" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Situação
+                                </label>
+
+                                <div class="form-check mt-2">
+                                    <InputCheckbox id="ativo"
+                                                   class="form-check-input"
+                                                   @bind-Value="cliente.Ativo" />
+
+                                    <label for="ativo"
+                                           class="form-check-label">
+                                        Cliente ativo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                disabled="@processando"
+                                @onclick="FecharModalCadastro">
+                            Cancelar
+                        </button>
+
+                        <button type="submit"
+                                class="btn btn-success"
+                                disabled="@processando">
+
+                            @if (processando)
+                            {
+                                <span class="spinner-border
+                                                     spinner-border-sm me-2"
+                                      aria-hidden="true">
+                                </span>
+
+                                <span>Salvando...</span>
+                            }
+                            else
+                            {
+                                <span>
+                                    @(clienteId.HasValue
+                                                                ? "Salvar alterações"
+                                                                : "Cadastrar cliente")
+                        </span>
+                                                }
+                        </button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal de confirmação da exclusão -->
+@if (exibirModalExclusao && clienteParaExcluir is not null)
+{
+    <div class="modal-backdrop fade show"></div>
+
+    <div class="modal fade show d-block"
+         tabindex="-1"
+         role="dialog"
+         aria-modal="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Confirmar exclusão
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            aria-label="Fechar"
+                            disabled="@processando"
+                            @onclick="CancelarExclusao">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Deseja realmente excluir o cliente
+                        <strong>@clienteParaExcluir.Nome</strong>?
+                    </p>
+
+                    <p class="text-danger mb-0">
+                        Essa operação não poderá ser desfeita.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-outline-secondary"
+                            disabled="@processando"
+                            @onclick="CancelarExclusao">
+                        Cancelar
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-danger"
+                            disabled="@processando"
+                            @onclick="ExcluirClienteAsync">
+
+                        @if (processando)
+                        {
+                            <span class="spinner-border
+                                                 spinner-border-sm me-2"
+                                  aria-hidden="true">
+                            </span>
+                        }
+
+                        Excluir cliente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private IReadOnlyList<ClienteResponse> clientes =
+        Array.Empty<ClienteResponse>();
+
+    private ClienteRequest cliente = new();
+    private ClienteResponse? clienteParaExcluir;
+
+    private CancellationTokenSource?
+        pesquisaCancellationTokenSource;
+
+    private int? clienteId;
+
+    private string pesquisa = string.Empty;
+    private string mensagem = string.Empty;
+    private string erroModal = string.Empty;
+    private string classeMensagem = "alert-success";
+
+    private bool carregando;
+    private bool pesquisando;
+    private bool processando;
+    private bool exibirModalCadastro;
+    private bool exibirModalExclusao;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarClientesAsync();
+    }
+
+    private async Task CarregarClientesAsync()
+    {
+        carregando = true;
+
+        try
+        {
+            clientes = await ClienteApiClient
+                .PesquisarAsync(pesquisa);
+        }
+        catch (Exception)
+        {
+            ExibirErro(
+                "Não foi possível carregar os clientes.");
+        }
+        finally
+        {
+            carregando = false;
+            pesquisando = false;
+        }
+    }
+
+    private async Task AoDigitarPesquisaAsync(
+        ChangeEventArgs eventArgs)
+    {
+        pesquisa =
+            eventArgs.Value?.ToString() ?? string.Empty;
+
+        pesquisaCancellationTokenSource?.Cancel();
+        pesquisaCancellationTokenSource?.Dispose();
+
+        pesquisaCancellationTokenSource =
+            new CancellationTokenSource();
+
+        var cancellationToken =
+            pesquisaCancellationTokenSource.Token;
+
+        pesquisando = true;
+
+        try
+        {
+            // Evita uma requisição para cada tecla digitada.
+            await Task.Delay(400, cancellationToken);
+
+            await CarregarClientesAsync();
+        }
+        catch (OperationCanceledException)
+        {
+            // O usuário continuou digitando.
+        }
+        finally
+        {
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                pesquisando = false;
+            }
+        }
+    }
+
+    private void NovoCliente()
+    {
+        clienteId = null;
+
+        cliente = new ClienteRequest
+        {
+            Ativo = true
+        };
+
+        erroModal = string.Empty;
+        LimparMensagem();
+
+        exibirModalCadastro = true;
+    }
+
+    private async Task EditarClienteAsync(int id)
+    {
+        processando = true;
+        erroModal = string.Empty;
+
+        try
+        {
+            var clienteEncontrado =
+                await ClienteApiClient.ObterPorIdAsync(id);
+
+            if (clienteEncontrado is null)
+            {
+                ExibirErro("Cliente não encontrado.");
+                return;
+            }
+
+            clienteId = clienteEncontrado.Id;
+
+            cliente = new ClienteRequest
+            {
+                Nome = clienteEncontrado.Nome,
+                Email = clienteEncontrado.Email,
+                Telefone = clienteEncontrado.Telefone,
+                Ativo = clienteEncontrado.Ativo
+            };
+
+            exibirModalCadastro = true;
+        }
+        catch (Exception)
+        {
+            ExibirErro(
+                "Não foi possível carregar o cliente.");
+        }
+        finally
+        {
+            processando = false;
+        }
+    }
+
+    private async Task SalvarClienteAsync()
+    {
+        processando = true;
+        erroModal = string.Empty;
+
+        try
+        {
+            if (clienteId.HasValue)
+            {
+                await ClienteApiClient.AtualizarAsync(
+                    clienteId.Value,
+                    cliente);
+
+                ExibirSucesso(
+                    "Cliente atualizado com sucesso.");
+            }
+            else
+            {
+                await ClienteApiClient.AdicionarAsync(
+                    cliente);
+
+                ExibirSucesso(
+                    "Cliente cadastrado com sucesso.");
+            }
+
+            exibirModalCadastro = false;
+            clienteId = null;
+            cliente = new ClienteRequest();
+
+            await CarregarClientesAsync();
+        }
+        catch (InvalidOperationException exception)
+        {
+            erroModal = exception.Message;
+        }
+        catch (Exception)
+        {
+            erroModal =
+                "Ocorreu um erro ao salvar o cliente.";
+        }
+        finally
+        {
+            processando = false;
+        }
+    }
+
+    private void ConfirmarExclusao(
+        ClienteResponse clienteSelecionado)
+    {
+        clienteParaExcluir = clienteSelecionado;
+        exibirModalExclusao = true;
+    }
+
+    private async Task ExcluirClienteAsync()
+    {
+        if (clienteParaExcluir is null)
+            return;
+
+        processando = true;
+
+        try
+        {
+            var excluido = await ClienteApiClient
+                .ExcluirAsync(clienteParaExcluir.Id);
+
+            if (!excluido)
+            {
+                ExibirErro("Cliente não encontrado.");
+                return;
+            }
+
+            ExibirSucesso(
+                "Cliente excluído com sucesso.");
+
+            exibirModalExclusao = false;
+            clienteParaExcluir = null;
+
+            await CarregarClientesAsync();
+        }
+        catch (Exception)
+        {
+            ExibirErro(
+                "Ocorreu um erro ao excluir o cliente.");
+        }
+        finally
+        {
+            processando = false;
+        }
+    }
+
+    private void FecharModalCadastro()
+    {
+        if (processando)
+            return;
+
+        exibirModalCadastro = false;
+        clienteId = null;
+        cliente = new ClienteRequest();
+        erroModal = string.Empty;
+    }
+
+    private void CancelarExclusao()
+    {
+        if (processando)
+            return;
+
+        exibirModalExclusao = false;
+        clienteParaExcluir = null;
+    }
+
+    private void ExibirSucesso(string texto)
+    {
+        mensagem = texto;
+        classeMensagem = "alert-success";
+    }
+
+    private void ExibirErro(string texto)
+    {
+        mensagem = texto;
+        classeMensagem = "alert-danger";
+    }
+
+    private void LimparMensagem()
+    {
+        mensagem = string.Empty;
+        classeMensagem = "alert-success";
+    }
+
+    public void Dispose()
+    {
+        pesquisaCancellationTokenSource?.Cancel();
+        pesquisaCancellationTokenSource?.Dispose();
+    }
+}

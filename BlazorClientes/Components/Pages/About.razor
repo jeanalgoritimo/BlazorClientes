@@ -1,0 +1,668 @@
+﻿@page "/about"
+
+<PageTitle>Sobre</PageTitle>
+
+<div class="about-page">
+    <!-- Apresentação -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <span class="section-label">
+                SOBRE O PROJETO
+            </span>
+
+            <h1>
+                Sistema de Gestão de Clientes
+            </h1>
+
+            <p>
+                Aplicação desenvolvida com Blazor e ASP.NET Core
+                para demonstrar uma arquitetura moderna, organizada
+                e preparada para evolução.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3 mt-4">
+                <a href="/clientes"
+                   class="btn btn-primary btn-lg">
+                    Acessar clientes
+                </a>
+
+                <a href="/"
+                   class="btn btn-outline-secondary btn-lg">
+                    Voltar ao início
+                </a>
+            </div>
+        </div>
+
+        <div class="project-symbol">
+            <div class="symbol-circle">
+                SG
+            </div>
+
+            <strong>Blazor Clientes</strong>
+            <span>ASP.NET Core · .NET 8</span>
+        </div>
+    </section>
+
+    <!-- Objetivo -->
+    <section class="content-section">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="content-card h-100">
+                    <span class="section-label">
+                        OBJETIVO
+                    </span>
+
+                    <h2>
+                        Uma aplicação prática e profissional
+                    </h2>
+
+                    <p>
+                        Este projeto foi criado para demonstrar
+                        conceitos utilizados no desenvolvimento
+                        de aplicações corporativas com o
+                        ecossistema .NET.
+                    </p>
+
+                    <p>
+                        O sistema disponibiliza cadastro, consulta,
+                        pesquisa automática, edição e exclusão de
+                        clientes. A interface Blazor consome uma
+                        API REST desenvolvida com ASP.NET Core.
+                    </p>
+
+                    <p class="mb-0">
+                        A aplicação utiliza Entity Framework Core
+                        com banco InMemory durante o desenvolvimento,
+                        mantendo a estrutura preparada para utilização
+                        do PostgreSQL.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="content-card h-100">
+                    <span class="section-label">
+                        FUNCIONALIDADES
+                    </span>
+
+                    <h2>Principais recursos</h2>
+
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-check">✓</span>
+                            <span>Cadastro de clientes</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check">✓</span>
+                            <span>Edição de informações</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check">✓</span>
+                            <span>Exclusão com confirmação</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check">✓</span>
+                            <span>Pesquisa automática</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check">✓</span>
+                            <span>Validação dos dados</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check">✓</span>
+                            <span>Interface responsiva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arquitetura -->
+    <section class="architecture-section">
+        <div class="section-heading">
+            <span class="section-label">
+                ARQUITETURA
+            </span>
+
+            <h2>Separação de responsabilidades</h2>
+
+            <p>
+                Cada camada possui uma responsabilidade bem definida.
+            </p>
+        </div>
+
+        <div class="architecture-grid">
+            <div class="architecture-item">
+                <div class="architecture-number">
+                    01
+                </div>
+
+                <h5>Blazor</h5>
+
+                <p>
+                    Interface e interação com o usuário.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">
+                →
+            </div>
+
+            <div class="architecture-item">
+                <div class="architecture-number">
+                    02
+                </div>
+
+                <h5>API Controller</h5>
+
+                <p>
+                    Recebe e responde requisições HTTP.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">
+                →
+            </div>
+
+            <div class="architecture-item">
+                <div class="architecture-number">
+                    03
+                </div>
+
+                <h5>Service</h5>
+
+                <p>
+                    Executa as regras de negócio.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">
+                →
+            </div>
+
+            <div class="architecture-item">
+                <div class="architecture-number">
+                    04
+                </div>
+
+                <h5>Repository</h5>
+
+                <p>
+                    Realiza o acesso ao banco de dados.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnologias -->
+    <section class="technologies-section">
+        <div class="section-heading">
+            <span class="section-label">
+                TECNOLOGIAS
+            </span>
+
+            <h2>Tecnologias utilizadas</h2>
+        </div>
+
+        <div class="technology-grid">
+            <div class="technology-card">
+                <span class="technology-icon blue">
+                    C#
+                </span>
+
+                <div>
+                    <strong>C# e .NET 8</strong>
+                    <small>Linguagem e plataforma</small>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <span class="technology-icon purple">
+                    B
+                </span>
+
+                <div>
+                    <strong>Blazor</strong>
+                    <small>Interface web interativa</small>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <span class="technology-icon green">
+                    API
+                </span>
+
+                <div>
+                    <strong>ASP.NET Core</strong>
+                    <small>API REST</small>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <span class="technology-icon orange">
+                    EF
+                </span>
+
+                <div>
+                    <strong>Entity Framework</strong>
+                    <small>Persistência de dados</small>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <span class="technology-icon dark-blue">
+                    PG
+                </span>
+
+                <div>
+                    <strong>PostgreSQL</strong>
+                    <small>Banco de dados relacional</small>
+                </div>
+            </div>
+
+            <div class="technology-card">
+                <span class="technology-icon red">
+                    Git
+                </span>
+
+                <div>
+                    <strong>Git</strong>
+                    <small>Controle de versão</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boas práticas -->
+    <section class="practices-section">
+        <div class="practices-content">
+            <div>
+                <span class="section-label light">
+                    BOAS PRÁTICAS
+                </span>
+
+                <h2>
+                    Código preparado para crescer
+                </h2>
+
+                <p>
+                    A estrutura aplica princípios de Clean Code,
+                    SOLID, injeção de dependência, DTOs e Repository
+                    Pattern.
+                </p>
+            </div>
+
+            <div class="practice-tags">
+                <span>Clean Code</span>
+                <span>SOLID</span>
+                <span>DTOs</span>
+                <span>Dependency Injection</span>
+                <span>Repository Pattern</span>
+                <span>API REST</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .about-page {
+        --primary: #2563eb;
+        --secondary: #7c3aed;
+        color: #172033;
+    }
+
+    .about-hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+        padding: 4rem;
+        border-radius: 1.5rem;
+        background: radial-gradient( circle at top right, rgba(124, 58, 237, 0.2), transparent 38% ), linear-gradient( 135deg, #eff6ff 0%, #f5f3ff 100% );
+    }
+
+    .hero-content {
+        max-width: 720px;
+    }
+
+    .section-label {
+        color: var(--primary);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.1rem;
+    }
+
+        .section-label.light {
+            color: #93c5fd;
+        }
+
+    .about-hero h1 {
+        margin-top: 1rem;
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        font-weight: 750;
+        line-height: 1.05;
+    }
+
+    .about-hero p {
+        max-width: 650px;
+        margin-top: 1.5rem;
+        color: #64748b;
+        font-size: 1.1rem;
+        line-height: 1.75;
+    }
+
+    .project-symbol {
+        display: flex;
+        min-width: 260px;
+        padding: 2rem;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 1.25rem;
+        background-color: rgba(255, 255, 255, 0.75);
+        text-align: center;
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1);
+    }
+
+        .project-symbol span {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+    .symbol-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1rem;
+        border-radius: 1.5rem;
+        background: linear-gradient( 135deg, var(--primary), var(--secondary) );
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 800;
+        box-shadow: 0 15px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .content-section,
+    .architecture-section,
+    .technologies-section,
+    .practices-section {
+        padding-top: 4rem;
+    }
+
+    .content-card {
+        padding: 2rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        background-color: white;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
+
+        .content-card h2 {
+            margin: 0.75rem 0 1.25rem;
+            font-weight: 700;
+        }
+
+        .content-card p {
+            color: #64748b;
+            line-height: 1.75;
+        }
+
+    .feature-list {
+        display: grid;
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        border-radius: 0.7rem;
+        background-color: #f8fafc;
+    }
+
+    .feature-check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background-color: #dcfce7;
+        color: #15803d;
+        font-weight: 800;
+    }
+
+    .section-heading {
+        max-width: 680px;
+        margin: 0 auto 2.5rem;
+        text-align: center;
+    }
+
+        .section-heading h2 {
+            margin-top: 0.75rem;
+            font-weight: 700;
+        }
+
+        .section-heading p {
+            color: #64748b;
+        }
+
+    .architecture-grid {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .architecture-item {
+        flex: 1;
+        max-width: 250px;
+        padding: 1.5rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        background-color: white;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+    }
+
+        .architecture-item p {
+            margin-bottom: 0;
+            color: #64748b;
+        }
+
+    .architecture-number {
+        margin-bottom: 1rem;
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 800;
+    }
+
+    .architecture-arrow {
+        display: flex;
+        align-items: center;
+        color: #94a3b8;
+        font-size: 1.5rem;
+    }
+
+    .technology-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .technology-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.9rem;
+        background-color: white;
+    }
+
+        .technology-card div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .technology-card small {
+            color: #64748b;
+        }
+
+    .technology-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 0.8rem;
+        font-size: 0.8rem;
+        font-weight: 800;
+    }
+
+    .blue {
+        color: #1d4ed8;
+        background-color: #dbeafe;
+    }
+
+    .purple {
+        color: #6d28d9;
+        background-color: #ede9fe;
+    }
+
+    .green {
+        color: #15803d;
+        background-color: #dcfce7;
+    }
+
+    .orange {
+        color: #c2410c;
+        background-color: #ffedd5;
+    }
+
+    .dark-blue {
+        color: #1e3a8a;
+        background-color: #dbeafe;
+    }
+
+    .red {
+        color: #b91c1c;
+        background-color: #fee2e2;
+    }
+
+    .practices-section {
+        padding-bottom: 2rem;
+    }
+
+    .practices-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 3rem;
+        border-radius: 1.5rem;
+        background: linear-gradient( 135deg, #0f2859, #31105c );
+        color: white;
+    }
+
+        .practices-content > div:first-child {
+            max-width: 600px;
+        }
+
+        .practices-content h2 {
+            margin-top: 0.75rem;
+            font-weight: 700;
+        }
+
+        .practices-content p {
+            margin-bottom: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+    .practice-tags {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+
+        .practice-tags span {
+            padding: 0.55rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+        }
+
+    @@media (max-width: 991.98px) {
+        .about-hero {
+            padding: 3rem 2rem;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .project-symbol {
+            width: 100%;
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .architecture-item {
+            max-width: none;
+        }
+
+        .architecture-arrow {
+            display: none;
+        }
+
+        .technology-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .practices-content {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .practice-tags {
+            justify-content: flex-start;
+        }
+    }
+
+    @@media (max-width: 575.98px) {
+        .about-hero {
+            padding: 2rem 1.25rem;
+        }
+
+        .content-section,
+        .architecture-section,
+        .technologies-section,
+        .practices-section {
+            padding-top: 2.5rem;
+        }
+
+        .architecture-grid,
+        .technology-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .content-card,
+        .practices-content {
+            padding: 1.5rem;
+        }
+    }
+</style>

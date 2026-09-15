@@ -1,0 +1,148 @@
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+
+/* Menu sempre inicia escondido */
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1050;
+    width: 280px;
+    max-width: 82vw;
+    overflow-y: auto;
+    background: linear-gradient( 180deg, #08285a 0%, #1e1b67 48%, #420047 100% );
+    box-shadow: 4px 0 25px rgba(15, 23, 42, 0.25);
+    transform: translateX(-105%);
+    transition: transform 0.25s ease;
+}
+
+    /* Menu aberto após clicar no botão */
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+.main-content {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+}
+
+.top-bar-title {
+    color: #172033;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.top-bar-link {
+    margin-left: auto;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+    .top-bar-link:hover {
+        text-decoration: underline;
+    }
+
+/* Botão sempre visível */
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    margin-right: 1rem;
+    padding: 9px;
+    border: 0;
+    border-radius: 0.65rem;
+    background-color: #eff6ff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .menu-toggle:hover {
+        background-color: #dbeafe;
+    }
+
+    .menu-toggle:focus {
+        outline: 3px solid rgba(37, 99, 235, 0.25);
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        margin: 3px 0;
+        border-radius: 2px;
+        background-color: #1e3a8a;
+    }
+
+/* Fundo escuro ao abrir o menu */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1040;
+    display: block;
+    padding: 0;
+    border: 0;
+    background-color: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    padding: 1.5rem;
+}
+
+#blazor-error-ui {
+    display: none;
+}
+
+@media (max-width: 575.98px) {
+    .sidebar {
+        width: 82vw;
+    }
+
+    .top-bar {
+        min-height: 58px;
+        padding: 0 0.75rem;
+    }
+
+    .top-bar-title {
+        overflow: hidden;
+        font-size: 0.9rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .top-bar-link {
+        font-size: 0.9rem;
+    }
+
+    .content {
+        padding: 0.75rem;
+    }
+
+    .menu-toggle {
+        width: 40px;
+        height: 40px;
+        margin-right: 0.75rem;
+    }
+}

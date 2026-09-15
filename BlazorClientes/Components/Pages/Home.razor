@@ -1,0 +1,578 @@
+﻿@page "/"
+
+<PageTitle>Início</PageTitle>
+
+<div class="home-page">
+    <!-- Apresentação -->
+    <section class="hero-section">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <span class="hero-badge">
+                    Sistema de Gestão
+                </span>
+
+                <h1 class="hero-title mt-3">
+                    Gerencie seus clientes de forma
+                    <span class="text-gradient">
+                        simples e eficiente
+                    </span>
+                </h1>
+
+                <p class="hero-description">
+                    Aplicação construída com Blazor, ASP.NET Core,
+                    API REST, Entity Framework Core e arquitetura
+                    baseada em boas práticas de desenvolvimento.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a href="/clientes"
+                       class="btn btn-primary btn-lg px-4">
+                        Acessar clientes
+                    </a>
+
+                    <a href="#recursos"
+                       class="btn btn-outline-secondary btn-lg px-4">
+                        Conhecer recursos
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <div>
+                            <small class="text-muted">
+                                Visão geral
+                            </small>
+
+                            <h5 class="mb-0">
+                                Gestão de clientes
+                            </h5>
+                        </div>
+
+                        <span class="status-indicator">
+                            Online
+                        </span>
+                    </div>
+
+                    <div class="hero-card-content">
+                        <div class="overview-item">
+                            <div class="overview-icon blue">
+                                👥
+                            </div>
+
+                            <div>
+                                <strong>Cadastro</strong>
+
+                                <small>
+                                    Inclusão e validação de clientes
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="overview-item">
+                            <div class="overview-icon green">
+                                🔎
+                            </div>
+
+                            <div>
+                                <strong>Pesquisa automática</strong>
+
+                                <small>
+                                    Busca por nome, e-mail ou telefone
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="overview-item">
+                            <div class="overview-icon purple">
+                                ⚙️
+                            </div>
+
+                            <div>
+                                <strong>API REST</strong>
+
+                                <small>
+                                    Integração com ASP.NET Core
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="overview-item">
+                            <div class="overview-icon orange">
+                                🗄️
+                            </div>
+
+                            <div>
+                                <strong>Persistência</strong>
+
+                                <small>
+                                    Entity Framework e PostgreSQL
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos -->
+    <section id="recursos" class="resources-section">
+        <div class="section-heading">
+            <span class="section-subtitle">
+                RECURSOS
+            </span>
+
+            <h2>Uma base moderna para aplicações .NET</h2>
+
+            <p>
+                O projeto demonstra conceitos importantes utilizados
+                no desenvolvimento de sistemas corporativos.
+            </p>
+        </div>
+
+        <div class="row g-4 mt-2">
+            <div class="col-md-6 col-xl-3">
+                <div class="resource-card">
+                    <div class="resource-icon blue">
+                        🌐
+                    </div>
+
+                    <h5>API REST</h5>
+
+                    <p>
+                        Endpoints para cadastro, consulta, edição,
+                        pesquisa e exclusão de clientes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="resource-card">
+                    <div class="resource-icon purple">
+                        ⚡
+                    </div>
+
+                    <h5>Blazor</h5>
+
+                    <p>
+                        Interface interativa desenvolvida com
+                        componentes Razor e C#.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="resource-card">
+                    <div class="resource-icon green">
+                        🛡️
+                    </div>
+
+                    <h5>Clean Code e SOLID</h5>
+
+                    <p>
+                        Responsabilidades separadas entre Controller,
+                        Service e Repository.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="resource-card">
+                    <div class="resource-icon orange">
+                        🗃️
+                    </div>
+
+                    <h5>Banco de dados</h5>
+
+                    <p>
+                        Entity Framework Core com banco InMemory
+                        preparado para PostgreSQL.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arquitetura -->
+    <section class="architecture-section">
+        <div class="architecture-card">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-5">
+                    <span class="section-subtitle">
+                        ARQUITETURA
+                    </span>
+
+                    <h2 class="mt-2">
+                        Separação clara de responsabilidades
+                    </h2>
+
+                    <p class="text-muted">
+                        A aplicação utiliza camadas independentes,
+                        facilitando manutenção, testes e evolução.
+                    </p>
+
+                    <a href="/clientes"
+                       class="btn btn-dark">
+                        Visualizar aplicação
+                    </a>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="architecture-flow">
+                        <div class="flow-item">
+                            <span>1</span>
+                            <div>
+                                <strong>Blazor</strong>
+                                <small>Interface</small>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <div class="flow-item">
+                            <span>2</span>
+                            <div>
+                                <strong>Controller</strong>
+                                <small>API REST</small>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <div class="flow-item">
+                            <span>3</span>
+                            <div>
+                                <strong>Service</strong>
+                                <small>Regras</small>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <div class="flow-item">
+                            <span>4</span>
+                            <div>
+                                <strong>Repository</strong>
+                                <small>Banco</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnologias -->
+    <section class="technologies-section">
+        <p class="text-muted text-center">
+            Tecnologias utilizadas no projeto
+        </p>
+
+        <div class="technologies">
+            <span>.NET 8</span>
+            <span>Blazor</span>
+            <span>ASP.NET Core</span>
+            <span>API REST</span>
+            <span>Entity Framework Core</span>
+            <span>PostgreSQL</span>
+            <span>xUnit</span>
+            <span>Git</span>
+        </div>
+    </section>
+</div>
+
+<style>
+    .home-page {
+        --primary-color: #2563eb;
+        --secondary-color: #7c3aed;
+        color: #172033;
+    }
+
+    .hero-section {
+        padding: 5rem 2rem;
+        border-radius: 1.5rem;
+        background:
+            radial-gradient(
+                circle at top right,
+                rgba(37, 99, 235, 0.18),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #f8faff 0%,
+                #eef4ff 100%
+            );
+        overflow: hidden;
+    }
+
+    .hero-badge,
+    .section-subtitle {
+        color: var(--primary-color);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 0.9rem;
+        border-radius: 2rem;
+        background-color: rgba(37, 99, 235, 0.1);
+    }
+
+    .hero-title {
+        max-width: 750px;
+        font-size: clamp(2.3rem, 5vw, 4.3rem);
+        font-weight: 750;
+        line-height: 1.05;
+    }
+
+    .text-gradient {
+        background: linear-gradient(
+            90deg,
+            var(--primary-color),
+            var(--secondary-color)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .hero-description {
+        max-width: 680px;
+        margin-top: 1.5rem;
+        color: #64748b;
+        font-size: 1.15rem;
+        line-height: 1.75;
+    }
+
+    .hero-card {
+        padding: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        border-radius: 1.25rem;
+        background-color: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+    }
+
+    .hero-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .status-indicator {
+        padding: 0.35rem 0.7rem;
+        border-radius: 2rem;
+        background-color: #dcfce7;
+        color: #15803d;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .hero-card-content {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.25rem;
+    }
+
+    .overview-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.85rem;
+        border-radius: 0.8rem;
+        transition: 0.2s ease;
+    }
+
+    .overview-item:hover {
+        background-color: #f8fafc;
+        transform: translateX(4px);
+    }
+
+    .overview-item div:last-child {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .overview-item small {
+        color: #64748b;
+    }
+
+    .overview-icon,
+    .resource-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .overview-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 0.8rem;
+    }
+
+    .resources-section,
+    .architecture-section,
+    .technologies-section {
+        padding: 5rem 1rem 1rem;
+    }
+
+    .section-heading {
+        max-width: 680px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .section-heading h2,
+    .architecture-card h2 {
+        font-weight: 700;
+    }
+
+    .section-heading p {
+        color: #64748b;
+        font-size: 1.05rem;
+    }
+
+    .resource-card {
+        height: 100%;
+        padding: 1.7rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 1rem;
+        background-color: white;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+        transition: 0.2s ease;
+    }
+
+    .resource-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 35px rgba(15, 23, 42, 0.1);
+    }
+
+    .resource-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 1.25rem;
+        border-radius: 0.9rem;
+        font-size: 1.4rem;
+    }
+
+    .resource-card p {
+        margin-bottom: 0;
+        color: #64748b;
+        line-height: 1.65;
+    }
+
+    .blue {
+        background-color: #dbeafe;
+    }
+
+    .green {
+        background-color: #dcfce7;
+    }
+
+    .purple {
+        background-color: #ede9fe;
+    }
+
+    .orange {
+        background-color: #ffedd5;
+    }
+
+    .architecture-card {
+        padding: 3rem;
+        border-radius: 1.5rem;
+        background-color: #f8fafc;
+    }
+
+    .architecture-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+    }
+
+    .flow-item {
+        min-width: 125px;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.85rem;
+        background-color: white;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .flow-item span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        margin-bottom: 0.65rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .flow-item div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flow-item small {
+        color: #64748b;
+    }
+
+    .flow-arrow {
+        color: #94a3b8;
+        font-size: 1.4rem;
+    }
+
+    .technologies {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .technologies span {
+        padding: 0.6rem 1rem;
+        border: 1px solid #dbe3ed;
+        border-radius: 2rem;
+        background-color: white;
+        color: #475569;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-section {
+            padding: 3rem 1.25rem;
+        }
+
+        .architecture-card {
+            padding: 2rem 1.25rem;
+        }
+
+        .architecture-flow {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            transform: rotate(90deg);
+        }
+
+        .flow-item {
+            width: 100%;
+        }
+    }
+</style>
